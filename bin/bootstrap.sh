@@ -5,11 +5,12 @@ set -e
 ##################
 # Global variables
 
-ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../" && pwd)"
 DOTFILES_VARS="$ROOTDIR/.envrc"
-DOTFILES_HOSTS="$ROOTDIR/hosts"
-DOTFILES_PLAYBOOK="$ROOTDIR/dotfiles.yml"
-DOTFILES_CUSTOM_CONFIG="$ROOTDIR/vars/custom.yml"
+ANSIBLE_ROOTDIR="$ROOTDIR/ansible"
+DOTFILES_HOSTS="$ANSIBLE_ROOTDIR/hosts"
+DOTFILES_PLAYBOOK="$ANSIBLE_ROOTDIR/dotfiles.yml"
+DOTFILES_CUSTOM_CONFIG="$ANSIBLE_ROOTDIR/vars/custom.yml"
 
 ###########
 # Functions
@@ -39,12 +40,12 @@ function __bootstrap_usage {
     -t <TAG> - Role tag
 
   Environment variables:
-    DOTFILES_BOOTSTRAP_USER      - Linux user.
-    DOTFILES_BOOTSTRAP_GIT_NAME  - Git user name.
-    DOTFILES_BOOTSTRAP_GIT_EMAIL - Git user e-mail.
+    DOTFILES_USER      - Linux user.
+    DOTFILES_GIT_NAME  - Git user name.
+    DOTFILES_GIT_EMAIL - Git user e-mail.
 
   Tags:
-    $(ls "$ROOTDIR/roles" | tr "\n" " ")
+    $(ls "$ANSIBLE_ROOTDIR/roles" | tr "\n" " ")
   "
 
   exit "$1"
@@ -74,27 +75,27 @@ then
   TAG="all"
 fi
 
-if [ -z "$DOTFILES_BOOTSTRAP_USER" ]
+if [ -z "$DOTFILES_USER" ]
 then
-  __bootstrap_usage 1 "Cannot find variable DOTFILES_BOOTSTRAP_USER"
+  __bootstrap_usage 1 "Cannot find variable DOTFILES_USER"
 fi
 
 if [ "$TAG" = "all" ] || [ "$TAG" = "git" ]
 then
-  if [ -z "$DOTFILES_BOOTSTRAP_GIT_NAME" ]
+  if [ -z "$DOTFILES_GIT_NAME" ]
   then
-    __bootstrap_usage 1 "Cannot find variable DOTFILES_BOOTSTRAP_GIT_NAME"
+    __bootstrap_usage 1 "Cannot find variable DOTFILES_GIT_NAME"
   fi
 
-  if [ -z "$DOTFILES_BOOTSTRAP_GIT_EMAIL" ]
+  if [ -z "$DOTFILES_GIT_EMAIL" ]
   then
-    __bootstrap_usage 1 "Cannot find variable DOTFILES_BOOTSTRAP_GIT_EMAIL"
+    __bootstrap_usage 1 "Cannot find variable DOTFILES_GIT_EMAIL"
   fi
 fi
 
-DOTFILES_BOOTSTRAP_ROOT="$ROOTDIR"
-DOTFILES_BOOTSTRAP_USER_HOME=$(
-  getent passwd "$DOTFILES_BOOTSTRAP_USER" |
+DOTFILES_ROOT="$ANSIBLE_ROOTDIR"
+DOTFILES_USER_HOME=$(
+  getent passwd "$DOTFILES_USER" |
   cut -d: -f6
 )
 
@@ -109,25 +110,22 @@ apt autoremove
 
 export PATH="$PATH:/usr/sbin"
 
-adduser "$DOTFILES_BOOTSTRAP_USER" sudo
+adduser "$DOTFILES_USER" sudo
 
 if [ ! -f "$DOTFILES_CUSTOM_CONFIG" ]
 then
-  sudo -u "$DOTFILES_BOOTSTRAP_USER" \
+  sudo -u "$DOTFILES_USER" \
     echo "---" > "$DOTFILES_CUSTOM_CONFIG"
 fi
 
-sudo -u "$DOTFILES_BOOTSTRAP_USER" \
-  DOTFILES_BOOTSTRAP_ROOT="$DOTFILES_BOOTSTRAP_ROOT" \
-  DOTFILES_BOOTSTRAP_USER="$DOTFILES_BOOTSTRAP_USER" \
-  DOTFILES_BOOTSTRAP_USER_HOME="$DOTFILES_BOOTSTRAP_USER_HOME" \
-  DOTFILES_BOOTSTRAP_GIT_NAME="$DOTFILES_BOOTSTRAP_GIT_NAME" \
-  DOTFILES_BOOTSTRAP_GIT_EMAIL="$DOTFILES_BOOTSTRAP_GIT_EMAIL" \
-  DOTFILES_BOOTSTRAP_ZSH_OATH_KEY="$DOTFILES_BOOTSTRAP_ZSH_OATH_KEY" \
-  DOTFILES_BOOTSTRAP_ZSH_OATH_EMAIL="$DOTFILES_BOOTSTRAP_ZSH_OATH_EMAIL" \
+sudo -u "$DOTFILES_USER" \
+  DOTFILES_ROOT="$DOTFILES_ROOT" \
+  DOTFILES_USER="$DOTFILES_USER" \
+  DOTFILES_USER_HOME="$DOTFILES_USER_HOME" \
+  DOTFILES_GIT_NAME="$DOTFILES_GIT_NAME" \
+  DOTFILES_GIT_EMAIL="$DOTFILES_GIT_EMAIL" \
   ansible-playbook -i "$DOTFILES_HOSTS" "$DOTFILES_PLAYBOOK" \
   --ask-become-pass \
   --tags "$TAG"
 
 exit 0
-

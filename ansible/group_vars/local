@@ -1,0 +1,4 @@
+dotfiles_home: "{{ lookup('env', 'DOTFILES_ROOT') }}"
+
+dotfiles_user: "{{ lookup('env', 'DOTFILES_USER') }}"
+dotfiles_user_home: "{{ lookup('env', 'DOTFILES_USER_HOME') }}"
