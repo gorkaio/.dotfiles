@@ -1,0 +1,18 @@
+- name: Setup local workstation
+  hosts: local
+  vars_files:
+    - ./vars/custom.yml
+  roles:
+    - role: base
+      tags:
+        - base
+    - role: git
+      tags:
+        - git
+    - role: zsh
+      tags:
+        - zsh
+    - role: asdf
+      tags:
+        - asdf
+

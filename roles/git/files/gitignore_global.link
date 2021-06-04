@@ -1,0 +1,48 @@
+## Editors ###
+
+# WebStorm
+.idea/
+
+# VSCode
+.vscode/
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# session
+Session.vim
+
+# temporary
+*~
+
+# auto-generated tag files
+tags
+
+
+## Languages ###
+
+# Node
+node_modules/
+
+# Erlang/Elixir
+/config/*.secret.exs
+erl_crash.dump
+.elixir_ls/
+
+
+## Operative System ###
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+
+## Misc ###
+
+# env files
+.env*

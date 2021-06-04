@@ -1,0 +1,29 @@
+###############################################################################
+# BEGIN: Base
+
+export ZSH=/home/{{dotfiles_user}}/.oh-my-zsh
+
+ZSH_THEME="candy"
+
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -U add-zsh-hook
+
+plugins=(
+  git
+  hab
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# END: Base
+###############################################################################
+
+###############################################################################
+# BEGIN: Others
+
+source {{ dotfiles_home }}/**/*.zsh
+
+
+# END: Others
+###############################################################################
