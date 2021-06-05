@@ -1,2 +1,4 @@
 .envrc
 vars/custom.yml
+downloads/*
+config/*

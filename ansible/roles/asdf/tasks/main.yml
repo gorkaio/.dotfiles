@@ -5,8 +5,27 @@
 - name: asdf | Installs asdf | git
   git:
     repo: "https://github.com/asdf-vm/asdf.git"
-    dest: "{{ dotfiles_user_home }}/.asdf"
+    dest: "/opt/asdf"
     version: "v{{ asdf_version }}"
     clone: yes
     update: yes
     force: yes
+  become: yes
+
+- name: asdf | Create asdf config directory | file
+  file:
+    path: "{{ dotfiles_config_root }}/asdf/"
+    state: directory
+
+- name: asdf | Copies asdf.zsh | file
+  copy:
+    src: "asdf.zsh"
+    dest: "{{ dotfiles_config_root }}/asdf/asdf.zsh"
+    force: yes
+
+- name: asdf | Common build utilities | apt
+  become: yes
+  loop: "{{ build_packages }}"
+  apt:
+    name: "{{ item }}"
+    state: present

@@ -3,3 +3,12 @@ asdf_version: 0.8.1
 asdf_dir: "{{ dotfiles_user_home }}/.asdf"
 asdf_bin: "{{ asdf_dir }}/bin/asdf"
 asdf_src: "{{ asdf_dir}}/asdf.sh"
+
+build_packages:
+  - libssl-dev
+  - automake
+  - autoconf
+  - build-essential
+  - unzip
+  - libncurses5-dev
+  - zlib1g-dev

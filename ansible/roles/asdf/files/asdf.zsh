@@ -1,2 +1,2 @@
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+. /opt/asdf/asdf.sh
+. /opt/asdf/completions/asdf.bash

@@ -93,7 +93,7 @@ then
   fi
 fi
 
-DOTFILES_ROOT="$ANSIBLE_ROOTDIR"
+DOTFILES_ROOT="$ROOTDIR"
 DOTFILES_USER_HOME=$(
   getent passwd "$DOTFILES_USER" |
   cut -d: -f6
