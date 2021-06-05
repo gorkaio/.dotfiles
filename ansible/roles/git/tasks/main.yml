@@ -9,10 +9,15 @@
     name: git
     state: present
 
+- name: git | Create git config directory | file
+  file:
+    path: "{{ dotfiles_config_root }}/git/"
+    state: directory
+
 - name: Git | Copy global gitignore file | copy
   copy:
-    src: "{{ dotfiles_ansible_root }}/roles/git/files/gitignore_global.link"
-    dest: "{{ dotfiles_config_root }}/.gitignore_global"
+    src: "{{ dotfiles_ansible_root }}/roles/git/files/gitignore_global"
+    dest: "{{ dotfiles_config_root }}/git/.gitignore_global"
     force: yes
 
 - name: Git | Copies git config | template
