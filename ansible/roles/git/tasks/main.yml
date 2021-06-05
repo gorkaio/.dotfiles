@@ -23,4 +23,4 @@
 - name: Git | Copies git config | template
   template:
     src: "gitconfig.j2"
-    dest: "{{ dotfiles_config_root }}/.gitconfig"
+    dest: "{{ dotfiles_config_root }}/git/.gitconfig"

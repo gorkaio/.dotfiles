@@ -32,10 +32,15 @@
   become: yes
   when: not opt_oh_my_zsh.stat.exists
 
+- name: zsh | Create zsh config directories | file
+  file:
+    path: "{{ dotfiles_config_root }}/zsh/.zsh"
+    state: directory
+
 - name: zsh | Copies .zshrc | template
   template:
     src: "zshrc.j2"
-    dest: "{{ dotfiles_config_root }}/.zshrc"
+    dest: "{{ dotfiles_config_root }}/zsh/.zshrc"
     force: yes
 
 - name: zsh | Installs hab | git

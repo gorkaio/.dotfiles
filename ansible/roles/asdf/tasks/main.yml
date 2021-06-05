@@ -14,13 +14,20 @@
 
 - name: asdf | Create asdf config directory | file
   file:
-    path: "{{ dotfiles_config_root }}/asdf/"
+    path: "{{ dotfiles_config_root }}/asdf/.asdf/"
     state: directory
 
-- name: asdf | Copies asdf.zsh | file
+- name: asdf | Copies asdf.zsh | copy
   copy:
     src: "asdf.zsh"
-    dest: "{{ dotfiles_config_root }}/asdf/asdf.zsh"
+    dest: "{{ dotfiles_config_root }}/asdf/.asdf/asdf.zsh"
+    force: yes
+
+- name: asdf | Link asdf.zsh to zsh config | file
+  file:
+    src: "{{ dotfiles_config_root }}/asdf/.asdf/asdf.zsh"
+    dest: "{{ dotfiles_config_root }}/zsh/.zsh/asdf.zsh"
+    state: link
     force: yes
 
 - name: asdf | Common build utilities | apt
