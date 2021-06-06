@@ -5,7 +5,7 @@
 - name: asdf | Installs asdf | git
   git:
     repo: "https://github.com/asdf-vm/asdf.git"
-    dest: "/opt/asdf"
+    dest: "{{ asdf_dir }}"
     version: "v{{ asdf_version }}"
     clone: yes
     update: yes
@@ -17,11 +17,10 @@
     path: "{{ dotfiles_config_root }}/asdf/.asdf/"
     state: directory
 
-- name: asdf | Copies asdf.zsh to zsh directory | copy
-  copy:
-    src: "asdf.zsh"
+- name: asdf | Copies asdf.zsh to zsh config | template
+  template:
+    src: "asdf.zsh.j2"
     dest: "{{ dotfiles_config_root }}/zsh/.zsh/asdf.zsh"
-    force: yes
 
 - name: asdf | Common build utilities | apt
   become: yes
