@@ -15,4 +15,7 @@
     - role: asdf
       tags:
         - asdf
+    - role: fzf
+      tags:
+        - fzf
 

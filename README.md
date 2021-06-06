@@ -25,6 +25,19 @@ export DOTFILES_BOOTSTRAP_GIT_EMAIL="<Git email>"
     After editing .envrc files.
     Opening new shells.
 
+### fzf
+
+[fzf](https://github.com/junegunn/fzf) is a general-porpouse command line fuzzy-finder.
+
+### fd-find
+
+[fd-find](https://github.com/sharkdp/fd) is a fast and user-friendly alternative to `find`.
+
+### bat
+
+[bat](https://github.com/sharkdp/bat) is a `cat` clone with syntax highlight and git integration.
+
+
 ## To-Do
 
 ### Auto stow config files

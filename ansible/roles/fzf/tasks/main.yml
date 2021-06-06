@@ -1,0 +1,28 @@
+---
+###############################################################################
+# FZF installation
+
+- name: FZF | Installs FZF | apt
+  become: yes
+  apt:
+    name: fzf
+    state: present
+
+- name: FZF | Installs fd-find | apt
+  become: yes
+  apt:
+    name: fd-find
+    state: present
+
+- name: FZF | Installs bat | apt
+  become: yes
+  become_user: root
+  apt:
+    name: bat
+    state: present
+
+- name: FZF | Copies fzf.zsh to zsh config directory | copy
+  copy:
+    src: "fzf.zsh"
+    dest: "{{ dotfiles_config_root }}/zsh/.zsh/fzf.zsh"
+    force: yes
