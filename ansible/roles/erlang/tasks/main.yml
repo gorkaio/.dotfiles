@@ -1,0 +1,31 @@
+---
+###############################################################################
+# Erlang installation
+
+- name: Erlang | Installs dependencies | apt
+  become: yes
+  loop: "{{ erlang_dependencies }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: Erlang | Installs Erlang plugin | shell
+  command: "{{ asdf_bin }} plugin-add erlang"
+  register: erlang_add
+  failed_when: erlang_add.rc == 1
+
+- name: Erlang | Updates Erlang plugin | shell
+  command: "{{ asdf_bin }} plugin-update erlang"
+
+- name: Erlang | Installs Erlang versions | command
+  command: "{{ asdf_bin }} install erlang {{ item }}"
+  loop: "{{ erlang_versions }}"
+
+- name: Erlang | Sets default Erlang version | command
+  command: "{{ asdf_bin }} global erlang {{ erlang_versions[0] }}"
+
+- name: Erlang | Copies erlang.zsh to zsh directory | copy
+  copy:
+    src: "erlang.zsh"
+    dest: "{{ dotfiles_config_root }}/zsh/.zsh/erlang.zsh"
+    force: yes
