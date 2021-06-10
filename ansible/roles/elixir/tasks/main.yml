@@ -10,9 +10,18 @@
 - name: Elixir | Updates Elixir plugin | command
   command: "{{ asdf_bin }} plugin-update elixir"
 
-- name: Elixir | Installs Elixir versions | command
-  command: "{{ asdf_bin }} install elixir {{ item }}"
+- name: Elixir | Installs Elixir versions | shell
+  shell: "source {{ asdf_src }} && asdf install elixir {{ item }}"
+  args:
+    executable: /bin/zsh
   loop: "{{ elixir_versions }}"
 
 - name: Elixir | Sets default Elixir version | command
-  command: "{{ asdf_bin }} global elixir {{ elixir_versions[0] }}"
+  shell: "source {{ asdf_src }} && asdf global elixir {{ elixir_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: Elixir | Reshims Elixir | shell
+  shell: "source {{ asdf_src }} && asdf reshim elixir"
+  args:
+    executable: /bin/zsh
