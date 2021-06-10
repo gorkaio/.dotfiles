@@ -10,9 +10,18 @@
 - name: Ruby | Updates Ruby plugin | command
   command: "{{ asdf_bin }} plugin-update ruby"
 
-- name: Ruby | Installs Ruby versions | command
-  command: "{{ asdf_bin }} install ruby {{ item }}"
+- name: Ruby | Installs Ruby versions | shell
+  shell: "source {{ asdf_src }} && asdf install ruby {{ item }}"
+  args:
+    executable: /bin/zsh
   loop: "{{ ruby_versions }}"
 
 - name: Ruby | Sets default Ruby version | command
-  command: "{{ asdf_bin }} global ruby {{ ruby_versions[0] }}"
+  shell: "source {{ asdf_src }} && asdf global ruby {{ ruby_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: Ruby | Reshims Ruby | shell
+  shell: "source {{ asdf_src }} && asdf reshim ruby"
+  args:
+    executable: /bin/zsh
