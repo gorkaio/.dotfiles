@@ -6,6 +6,7 @@ set -e
 # Global variables
 
 ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../" && pwd)"
+CONFIG_DIR="$ROOTDIR/config"
 DOTFILES_VARS="$ROOTDIR/.envrc"
 ANSIBLE_ROOTDIR="$ROOTDIR/ansible"
 DOTFILES_HOSTS="$ANSIBLE_ROOTDIR/hosts"
@@ -127,5 +128,7 @@ sudo -u "$DOTFILES_USER" \
   ansible-playbook -i "$DOTFILES_HOSTS" "$DOTFILES_PLAYBOOK" \
   --ask-become-pass \
   --tags "$TAG"
+
+su -c "cd \"$CONFIG_DIR\" && stow -vSt ~ *" "$DOTFILES_USER"
 
 exit 0

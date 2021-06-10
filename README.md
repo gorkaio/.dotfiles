@@ -40,10 +40,6 @@ export DOTFILES_BOOTSTRAP_GIT_EMAIL="<Git email>"
 
 ## To-Do
 
-### Auto stow config files
-
-Right now, you need to execute `stow -vSt ~ *` inside `config` directory to actually apply config changes.
-
 ### Cleanup zsh scripts added from other roles
 
 If we look at ASDF, it generates a `.zsh` file that needs to be sourced by Zsh. IT generates that file in its own directory and links it from the Zsh directory, with a hardcoded path. The reasoning for letting each role generate its own `.zsh` files should be clear, and having a look at Zsh we are trying to load each of these files
