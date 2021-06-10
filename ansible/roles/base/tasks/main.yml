@@ -20,3 +20,8 @@
   become_user: root
   apt:
     autoremove: yes
+
+- name: Base | Create Workspace directory | file
+  file:
+    path: "~/Workspace/"
+    state: directory
