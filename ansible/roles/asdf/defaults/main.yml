@@ -1,8 +1,9 @@
 asdf_version: 0.8.1
 
 asdf_dir: "/opt/asdf"
+asdf_data_dir: "~/.asdf"
 asdf_bin: "{{ asdf_dir }}/bin/asdf"
-asdf_src: "{{ asdf_dir}}/asdf.sh"
+asdf_src: "{{ asdf_dir }}/asdf.sh"
 
 build_packages:
   - libssl-dev
