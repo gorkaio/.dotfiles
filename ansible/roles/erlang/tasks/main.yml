@@ -9,6 +9,12 @@
     name: "{{ item }}"
     state: present
 
+- name: Erlang | Copies erlang.zsh to zsh directory | copy
+  copy:
+    src: "erlang.zsh"
+    dest: "{{ dotfiles_config_root }}/zsh/.zsh/erlang.zsh"
+    force: yes
+
 - name: Erlang | Installs Erlang plugin | shell
   command: "{{ asdf_bin }} plugin-add erlang"
   register: erlang_add
@@ -17,15 +23,18 @@
 - name: Erlang | Updates Erlang plugin | shell
   command: "{{ asdf_bin }} plugin-update erlang"
 
-- name: Erlang | Installs Erlang versions | command
-  command: "{{ asdf_bin }} install erlang {{ item }}"
+- name: Erlang | Installs Erlang versions | shell
+  shell: "source {{ asdf_src }} && asdf install erlang {{ item }}"
+  args:
+    executable: /bin/zsh
   loop: "{{ erlang_versions }}"
 
 - name: Erlang | Sets default Erlang version | command
-  command: "{{ asdf_bin }} global erlang {{ erlang_versions[0] }}"
+  shell: "source {{ asdf_src }} && asdf global erlang {{ erlang_versions[0] }}"
+  args:
+    executable: /bin/zsh
 
-- name: Erlang | Copies erlang.zsh to zsh directory | copy
-  copy:
-    src: "erlang.zsh"
-    dest: "{{ dotfiles_config_root }}/zsh/.zsh/erlang.zsh"
-    force: yes
+- name: Erlang | Reshims Erlang | shell
+  shell: "source {{ asdf_src }} && asdf reshim erlang"
+  args:
+    executable: /bin/zsh
