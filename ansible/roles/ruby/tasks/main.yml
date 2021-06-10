@@ -1,0 +1,18 @@
+---
+###############################################################################
+# Ruby installation
+
+- name: Ruby | Installs Ruby plugin | command
+  command: "{{ asdf_bin }} plugin-add ruby"
+  register: ruby_add
+  failed_when: ruby_add.rc == 1
+
+- name: Ruby | Updates Ruby plugin | command
+  command: "{{ asdf_bin }} plugin-update ruby"
+
+- name: Ruby | Installs Ruby versions | command
+  command: "{{ asdf_bin }} install ruby {{ item }}"
+  loop: "{{ ruby_versions }}"
+
+- name: Ruby | Sets default Ruby version | command
+  command: "{{ asdf_bin }} global ruby {{ ruby_versions[0] }}"

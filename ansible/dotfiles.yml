@@ -24,3 +24,6 @@
     - role: elixir
       tags:
         - elixir
+    - role: ruby
+      tags:
+        - ruby

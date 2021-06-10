@@ -22,6 +22,11 @@
     src: "asdf.zsh.j2"
     dest: "{{ dotfiles_config_root }}/zsh/.zsh/asdf.zsh"
 
+- name: asdf | Copies .asdfrc to config | template
+  template:
+    src: "asdfrc.j2"
+    dest: "{{ dotfiles_config_root }}/asdf/.asdfrc"
+
 - name: asdf | Common build utilities | apt
   become: yes
   loop: "{{ build_packages }}"
