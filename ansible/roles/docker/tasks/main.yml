@@ -1,0 +1,39 @@
+---
+###############################################################################
+# Docker installation
+
+- name: Docker | Gets docker dependencies | apt
+  become: yes
+  loop: "{{ docker_dependencies }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: Docker | Gets APT key for docker | apt_key
+  become: yes
+  apt_key:
+    url: "{{ docker_gpg_key }}"
+    state: present
+
+- name: Docker | Updates repositories | apt_repository
+  become: yes
+  apt_repository:
+    repo: "{{ docker_repository }}"
+    state: present
+    filename: docker
+
+- name: Docker | Installs docker | apt
+  become: yes
+  loop: "{{ docker_packages }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+
+- name: Docker | Installs docker-compose | get_url
+  become: yes
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    force: yes
+    mode: '0755'

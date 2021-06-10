@@ -1,0 +1,15 @@
+docker_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+
+docker_gpg_key: "https://download.docker.com/linux/ubuntu/gpg"
+docker_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu hirsute stable"
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+
+docker_compose_version: 1.29.2
