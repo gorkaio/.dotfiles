@@ -66,10 +66,3 @@ asdf_version: 0.7.4
 
 [jq](https://stedolan.github.io/jq/) is a command line json processor.
 
-
-## To-Do
-
-### Cleanup zsh scripts added from other roles
-
-If we look at ASDF, it generates a `.zsh` file that needs to be sourced by Zsh. IT generates that file in its own directory and links it from the Zsh directory, with a hardcoded path. The reasoning for letting each role generate its own `.zsh` files should be clear, and having a look at Zsh we are trying to load each of these files
-without needing to specify each name using `/**/*.zsh`. This is maybe a little bit too magical, weak and coupled.
