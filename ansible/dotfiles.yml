@@ -24,9 +24,9 @@
     - role: elixir
       tags:
         - elixir
-    - role: ruby
+    - role: rails
       tags:
-        - ruby
+        - rails
     - role: nodejs
       tags:
         - nodejs

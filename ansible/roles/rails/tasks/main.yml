@@ -1,0 +1,8 @@
+---
+###############################################################################
+# Rails installation
+
+- name: Rails | Install Rails | shell
+  shell: "source {{ asdf_src }} && gem install bundler rails"
+  args:
+    executable: /bin/zsh

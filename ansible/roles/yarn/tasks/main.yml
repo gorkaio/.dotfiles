@@ -1,0 +1,29 @@
+---
+###############################################################################
+# Yarn installation
+
+- name: Yarn | Remove cmdtest to avoid conflict with yarn | apt
+  become: yes
+  apt:
+    name: cmdtest
+    state: absent
+
+- name: Yarn | Gets APT key for yarn | apt_key
+  become: yes
+  apt_key:
+    url: "{{ yarn_gpg_key }}"
+    state: present
+
+- name: Yarn | Updates repositories with yarn support | apt_repository
+  become: yes
+  apt_repository:
+    repo: "{{ yarn_repository }}"
+    state: present
+    filename: yarn
+
+- name: Yarn | Install yarn | apt
+  become: yes
+  apt:
+    name: yarn
+    state: present
+    update_cache: yes
