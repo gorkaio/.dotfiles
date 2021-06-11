@@ -15,9 +15,9 @@
     - role: asdf
       tags:
         - asdf
-    - role: fzf
+    - role: shell
       tags:
-        - fzf
+        - shell
     - role: erlang
       tags:
         - erlang

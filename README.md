@@ -15,6 +15,31 @@ export DOTFILES_BOOTSTRAP_GIT_NAME="<Git name>"
 export DOTFILES_BOOTSTRAP_GIT_EMAIL="<Git email>"
 ```
 
+> **NOTE**: The reason for not having defaults for these variables is to avoid
+> commiting personal data to the repository.
+
+When `./bin/bootstrap.sh` is executed with a tag, will install all roles
+necessary for that tag. This is useful for specific updates e.g:
+
+```
+# ./bin/bootstrap.sh -t erlang
+```
+
+> For more information just run `./bin/bootstrap.sh -h`
+
+## Overriding Variables
+
+All predefined variables can be overriden by creating the file `vars/custom.yml`
+with the overrides inside e.g:
+
+```yaml
+---
+
+docker_compose_version: 1.25.3
+fzf_bat_version: 0.12.0
+asdf_version: 0.7.4
+```
+
 ## Candy included
 
 ### OhMyZSH - Hab
@@ -36,6 +61,10 @@ export DOTFILES_BOOTSTRAP_GIT_EMAIL="<Git email>"
 ### bat
 
 [bat](https://github.com/sharkdp/bat) is a `cat` clone with syntax highlight and git integration.
+
+### jq
+
+[jq](https://stedolan.github.io/jq/) is a command line json processor.
 
 
 ## To-Do
