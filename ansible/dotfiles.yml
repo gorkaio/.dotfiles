@@ -18,9 +18,6 @@
     - role: shell
       tags:
         - shell
-    - role: erlang
-      tags:
-        - erlang
     - role: elixir
       tags:
         - elixir
