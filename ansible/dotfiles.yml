@@ -27,6 +27,9 @@
     - role: nodejs
       tags:
         - nodejs
+    - role: php
+      tags:
+        - php
     - role: docker
       tags:
         - docker

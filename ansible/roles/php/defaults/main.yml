@@ -1,0 +1,12 @@
+php_dependencies:
+  - bison
+  - re2c
+  - libxml2-dev
+  - libcurl4-openssl-dev
+  - libgd-dev
+  - libonig-dev
+  - libpq-dev
+  - libzip-dev
+
+php_versions:
+ - 8.0.7

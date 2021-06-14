@@ -1,0 +1,34 @@
+---
+###############################################################################
+# PHP installation
+
+- name: PHP | Installs dependencies | apt
+  become: yes
+  loop: "{{ php_dependencies }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: PHP | Installs PHP plugin | command
+  command: "{{ asdf_bin }} plugin-add php"
+  register: php_add
+  failed_when: php_add.rc == 1
+
+- name: PHP | Updates PHP plugin | command
+  command: "{{ asdf_bin }} plugin-update php"
+
+- name: PHP | Installs PHP versions | shell
+  shell: "source {{ asdf_src }} && asdf install php {{ item }}"
+  args:
+    executable: /bin/zsh
+  loop: "{{ php_versions }}"
+
+- name: PHP | Sets default PHP version | command
+  shell: "source {{ asdf_src }} && asdf global php {{ php_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: PHP | Reshims PHP | shell
+  shell: "source {{ asdf_src }} && asdf reshim php"
+  args:
+    executable: /bin/zsh
