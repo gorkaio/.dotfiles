@@ -110,8 +110,6 @@ DOTFILES_USER_HOME=$(
 
 apt update && apt install -y sudo ansible
 
-apt upgrade
-
 apt autoremove
 
 export PATH="$PATH:/usr/sbin"
