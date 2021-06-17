@@ -69,6 +69,11 @@ do
   esac
 done
 
+if [ ! -f "$DOTFILES_VARS" ]; then
+  __bootstrap_usage 1 "Required .envrc file not found. Check README file."
+  exit 1
+fi
+
 source "$DOTFILES_VARS" 2> /dev/null
 
 if [ -z "$TAG" ]
