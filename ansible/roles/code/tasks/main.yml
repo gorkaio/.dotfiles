@@ -1,0 +1,31 @@
+---
+###############################################################################
+# VsCode installation
+
+- name: Code | Gets code dependencies | apt
+  become: yes
+  loop: "{{ code_dependencies }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: Code | Gets APT key for code | apt_key
+  become: yes
+  apt_key:
+    url: "{{ code_gpg_key }}"
+    state: present
+
+- name: Code | Updates repositories | apt_repository
+  become: yes
+  apt_repository:
+    repo: "{{ code_repository }}"
+    state: present
+    filename: code
+
+- name: Code | Installs code | apt
+  become: yes
+  loop: "{{ code_packages }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes

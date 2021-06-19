@@ -33,3 +33,6 @@
     - role: docker
       tags:
         - docker
+    - role: code
+      tags:
+        - code
