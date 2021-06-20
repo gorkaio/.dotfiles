@@ -30,9 +30,6 @@
     - role: php
       tags:
         - php
-    - role: docker
-      tags:
-        - docker
     - role: code
       tags:
         - code

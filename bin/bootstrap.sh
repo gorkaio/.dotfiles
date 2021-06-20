@@ -41,10 +41,12 @@ function __bootstrap_usage {
     -t <TAG> - Role tag
 
   Environment variables:
-    DOTFILES_USER      - Linux user.
-    DOTFILES_HOSTNAME  - Host name.
-    DOTFILES_GIT_NAME  - Git user name.
-    DOTFILES_GIT_EMAIL - Git user e-mail.
+    DOTFILES_HOST_NAME       - Host name.
+    DOTFILES_USER_NAME_SHORT - System user name (ie: gorka).
+    DOTFILES_USER_NAME_FULL  - Full user name (ie: Gorka López de Torre)
+    DOTFILES_USER_EMAIL      - User e-mail.
+    DOTFILES_SMTP_APP_KEY    - SMTP auth app key as provided by Gmail.
+    DOTFILES_SMTP_RELAY_HOST - SMTP relay host (ie: [smtp.gmail.com]:587)
 
   Tags:
     $(ls "$ANSIBLE_ROOTDIR/roles" | tr "\n" " ")
@@ -82,32 +84,32 @@ then
   TAG="all"
 fi
 
-if [ -z "$DOTFILES_HOSTNAME" ]
+if [ -z "$DOTFILES_HOST_NAME" ]
 then
-  __bootstrap_usage 1 "Cannot find variable DOTFILES_HOSTNAME"
+  __bootstrap_usage 1 "Cannot find variable DOTFILES_HOST_NAME"
 fi
 
-if [ -z "$DOTFILES_USER" ]
+if [ -z "$DOTFILES_USER_NAME_SHORT" ]
 then
-  __bootstrap_usage 1 "Cannot find variable DOTFILES_USER"
+  __bootstrap_usage 1 "Cannot find variable DOTFILES_USER_NAME_SHORT"
 fi
 
 if [ "$TAG" = "all" ] || [ "$TAG" = "git" ]
 then
-  if [ -z "$DOTFILES_GIT_NAME" ]
+  if [ -z "$DOTFILES_USER_NAME_FULL" ]
   then
-    __bootstrap_usage 1 "Cannot find variable DOTFILES_GIT_NAME"
+    __bootstrap_usage 1 "Cannot find variable DOTFILES_USER_NAME_FULL"
   fi
 
-  if [ -z "$DOTFILES_GIT_EMAIL" ]
+  if [ -z "$DOTFILES_USER_EMAIL" ]
   then
-    __bootstrap_usage 1 "Cannot find variable DOTFILES_GIT_EMAIL"
+    __bootstrap_usage 1 "Cannot find variable DOTFILES_USER_EMAIL"
   fi
 fi
 
 DOTFILES_ROOT="$ROOTDIR"
 DOTFILES_USER_HOME=$(
-  getent passwd "$DOTFILES_USER" |
+  getent passwd "$DOTFILES_USER_NAME_SHORT" |
   cut -d: -f6
 )
 
@@ -120,27 +122,27 @@ apt autoremove
 
 export PATH="$PATH:/usr/sbin"
 
-adduser "$DOTFILES_USER" sudo
+adduser "$DOTFILES_USER_NAME_SHORT" sudo
 
 if [ ! -f "$DOTFILES_CUSTOM_CONFIG" ]
 then
-  sudo -u "$DOTFILES_USER" \
+  sudo -u "$DOTFILES_USER_NAME_SHORT" \
     echo "---" > "$DOTFILES_CUSTOM_CONFIG"
 fi
 
-sudo -u "$DOTFILES_USER" \
+sudo -u "$DOTFILES_USER_NAME_SHORT" \
   DOTFILES_ROOT="$DOTFILES_ROOT" \
-  DOTFILES_USER="$DOTFILES_USER" \
-  DOTFILES_HOSTNAME="$DOTFILES_HOSTNAME" \
+  DOTFILES_HOST_NAME="$DOTFILES_HOST_NAME" \
   DOTFILES_USER_HOME="$DOTFILES_USER_HOME" \
-  DOTFILES_GIT_NAME="$DOTFILES_GIT_NAME" \
-  DOTFILES_GIT_EMAIL="$DOTFILES_GIT_EMAIL" \
+  DOTFILES_USER_NAME_SHORT="$DOTFILES_USER_NAME_SHORT" \
+  DOTFILES_USER_NAME_FULL="$DOTFILES_USER_NAME_FULL" \
+  DOTFILES_USER_EMAIL="$DOTFILES_USER_EMAIL" \
   DOTFILES_SMTP_APP_KEY="$DOTFILES_SMTP_APP_KEY" \
   DOTFILES_SMTP_RELAY_HOST="$DOTFILES_SMTP_RELAY_HOST" \
   ansible-playbook -i "$DOTFILES_HOSTS" "$DOTFILES_PLAYBOOK" \
   --ask-become-pass \
   --tags "$TAG"
 
-su -c "cd \"$CONFIG_DIR\" && stow -vSt ~ *" "$DOTFILES_USER"
+su -c "cd \"$CONFIG_DIR\" && stow -vSt ~ *" "$DOTFILES_USER_NAME_SHORT"
 
 exit 0

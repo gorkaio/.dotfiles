@@ -10,10 +10,10 @@ Requires the following environment variables set into the file .envrc at the roo
 
 ```sh
 # .envrc file
-export DOTFILES_HOSTNAME="<Host name>"
-export DOTFILES_USER="<OS username>"
-export DOTFILES_GIT_NAME="<Git name>"
-export DOTFILES_GIT_EMAIL="<Git email>"
+export DOTFILES_HOST_NAME="<Host name>"
+export DOTFILES_USER_NAME_SHORT="<OS username>"
+export DOTFILES_USER_NAME_FULL="<Full user name>"
+export DOTFILES_USER_EMAIL="<User email address>"
 export DOTFILES_SMTP_APP_KEY="<Gmail SMTP app authorization key>"
 export DOTFILES_SMTP_RELAY_HOST="<SMTP relay host (ie: [smtp.gmail.com]:587)>"
 ```
@@ -69,3 +69,7 @@ asdf_version: 0.7.4
 
 [jq](https://stedolan.github.io/jq/) is a command line json processor.
 
+## To-Do
+
+- Improve how environment vars are handed over to ansible in `bootstrap.sh`
+- SMTP environment variables should be optional and only required for the email role

@@ -1,4 +1,4 @@
-hostname: "{{ lookup('env', 'DOTFILES_HOSTNAME') }}"
+hostname: "{{ lookup('env', 'DOTFILES_HOST_NAME') }}"
 
 base_packages:
   - curl
