@@ -80,3 +80,14 @@
   service:
     name: postfix
     state: restarted
+
+- name: mail | Create mutt config directory | file
+  file:
+    path: "{{ dotfiles_config_root }}/mutt"
+    state: directory
+
+- name: mail | Copy mutt configuration | template
+  template:
+    src: "muttrc.j2"
+    dest: "{{ dotfiles_config_root }}/mutt/.muttrc"
+    force: yes

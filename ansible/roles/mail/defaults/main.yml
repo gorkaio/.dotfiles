@@ -1,11 +1,15 @@
 mail_name: "{{ hostname }}"
 
-mail_relay_host: "{{ lookup('env', 'DOTFILES_SMTP_RELAY_HOST') }}"
-mail_smtp_app_key: "{{ lookup('env', 'DOTFILES_SMTP_APP_KEY') }}"
-mail_smtp_user: "{{ lookup('env', 'DOTFILES_USER_EMAIL') }}"
+mail_email_name:    "{{ lookup('env', 'DOTFILES_USER_NAME_FULL') }}"
+mail_email_address: "{{ lookup('env', 'DOTFILES_USER_EMAIL') }}"
+
+mail_relay_host:    "{{ lookup('env', 'DOTFILES_SMTP_RELAY_HOST') }}"
+mail_smtp_app_key:  "{{ lookup('env', 'DOTFILES_SMTP_APP_KEY') }}"
+mail_smtp_user:     "{{ lookup('env', 'DOTFILES_USER_EMAIL') }}"
 
 mail_packages:
   - postfix
   - libsasl2-2
   - libsasl2-modules
   - mailutils
+  - mutt
