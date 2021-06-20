@@ -2,6 +2,10 @@
 ###############################################################################
 # Base system
 
+- name: Base | Set host name | hostname
+  hostname:
+    name: "{{ hostname }}"
+
 - name: Base | Update and upgrade packages | apt
   become: yes
   apt:

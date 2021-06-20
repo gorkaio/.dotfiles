@@ -5,3 +5,4 @@ dotfiles_downloads_root: "{{ lookup('env', 'DOTFILES_ROOT') }}/downloads"
 
 dotfiles_user: "{{ lookup('env', 'DOTFILES_USER') }}"
 dotfiles_user_home: "{{ lookup('env', 'DOTFILES_USER_HOME') }}"
+dotfiles_hostname: "{{ lookup('env', 'DOTFILES_HOSTNAME') }}"

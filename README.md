@@ -10,9 +10,12 @@ Requires the following environment variables set into the file .envrc at the roo
 
 ```sh
 # .envrc file
+export DOTFILES_HOSTNAME="<Host name>"
 export DOTFILES_USER="<OS username>"
 export DOTFILES_GIT_NAME="<Git name>"
 export DOTFILES_GIT_EMAIL="<Git email>"
+export DOTFILES_SMTP_APP_KEY="<Gmail SMTP app authorization key>"
+export DOTFILES_SMTP_RELAY_HOST="<SMTP relay host (ie: [smtp.gmail.com]:587)>"
 ```
 
 > **NOTE**: The reason for not having defaults for these variables is to avoid

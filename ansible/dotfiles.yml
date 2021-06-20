@@ -36,3 +36,6 @@
     - role: code
       tags:
         - code
+    - role: mail
+      tags:
+        - mail

@@ -42,6 +42,7 @@ function __bootstrap_usage {
 
   Environment variables:
     DOTFILES_USER      - Linux user.
+    DOTFILES_HOSTNAME  - Host name.
     DOTFILES_GIT_NAME  - Git user name.
     DOTFILES_GIT_EMAIL - Git user e-mail.
 
@@ -79,6 +80,11 @@ source "$DOTFILES_VARS" 2> /dev/null
 if [ -z "$TAG" ]
 then
   TAG="all"
+fi
+
+if [ -z "$DOTFILES_HOSTNAME" ]
+then
+  __bootstrap_usage 1 "Cannot find variable DOTFILES_HOSTNAME"
 fi
 
 if [ -z "$DOTFILES_USER" ]
@@ -125,9 +131,12 @@ fi
 sudo -u "$DOTFILES_USER" \
   DOTFILES_ROOT="$DOTFILES_ROOT" \
   DOTFILES_USER="$DOTFILES_USER" \
+  DOTFILES_HOSTNAME="$DOTFILES_HOSTNAME" \
   DOTFILES_USER_HOME="$DOTFILES_USER_HOME" \
   DOTFILES_GIT_NAME="$DOTFILES_GIT_NAME" \
   DOTFILES_GIT_EMAIL="$DOTFILES_GIT_EMAIL" \
+  DOTFILES_SMTP_APP_KEY="$DOTFILES_SMTP_APP_KEY" \
+  DOTFILES_SMTP_RELAY_HOST="$DOTFILES_SMTP_RELAY_HOST" \
   ansible-playbook -i "$DOTFILES_HOSTS" "$DOTFILES_PLAYBOOK" \
   --ask-become-pass \
   --tags "$TAG"

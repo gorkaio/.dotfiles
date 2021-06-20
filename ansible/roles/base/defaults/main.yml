@@ -1,3 +1,5 @@
+hostname: "{{ lookup('env', 'DOTFILES_HOSTNAME') }}"
+
 base_packages:
   - curl
   - wget
