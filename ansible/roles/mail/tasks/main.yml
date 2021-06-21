@@ -53,12 +53,14 @@
   template:
     src: "main.cf.j2"
     dest: "/etc/postfix/main.cf"
+    backup: yes
 
 - name: mail | Copy smtp relay configuration | template
   become: yes
   template:
     src: "relay_passwd.j2"
     dest: "/etc/postfix/sasl/relay_passwd"
+    backup: yes
 
 - name: mail | Generate postfix credential files | shell
   become: yes
