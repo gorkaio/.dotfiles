@@ -36,3 +36,6 @@
     - role: mail
       tags:
         - mail
+    - role: vim
+      tags:
+        - vim

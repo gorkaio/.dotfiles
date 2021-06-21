@@ -1,0 +1,21 @@
+---
+###############################################################################
+# Vim editor
+
+- name: Vim | Installs packages | apt
+  become: yes
+  loop: "{{ vim_packages }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: Vim | Create vim config directory | file
+  file:
+    path: "{{ dotfiles_config_root }}/vim/"
+    state: directory
+
+- name: Vim | Copy vim config file | copy
+  copy:
+    src: "{{ dotfiles_ansible_root }}/roles/vim/files/vimrc"
+    dest: "{{ dotfiles_config_root }}/vim/.vimrc"
+    force: yes
