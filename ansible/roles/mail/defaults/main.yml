@@ -1,4 +1,4 @@
-mail_name: "{{ hostname }}"
+mail_hostname: "{{ lookup('env', 'DOTFILES_HOST_NAME') }}"
 
 mail_email_name:    "{{ lookup('env', 'DOTFILES_USER_NAME_FULL') }}"
 mail_email_address: "{{ lookup('env', 'DOTFILES_USER_EMAIL') }}"

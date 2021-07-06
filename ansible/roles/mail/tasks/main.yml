@@ -2,27 +2,39 @@
 ###############################################################################
 # Shell mail
 
-- name: mail | Check mandatory variables are defined | assert
+- name: mail | Check mail_hostname is defined | assert
   assert:
     that:
-      - "{{ ahs_var }} is defined"
-      - "{{ ahs_var }} | length > 0"
-      - "{{ ahs_var }} != None"
-    fail_msg: "{{ ahs_var }} needs to be set for the role to work"
-    success_msg: "Required variable {{ ahs_var }} is defined"
-  loop_control:
-    loop_var: ahs_var
-  with_items:
-    - mail_name
-    - mail_relay_host
-    - mail_smtp_app_key
+      - "mail_hostname is defined"
+      - "mail_hostname | length > 0"
+      - "mail_hostname != None"
+    fail_msg: "mail_hostname needs to be set for the role to work"
+    success_msg: "Required variable mail_hostname is defined"
+
+- name: mail | Check mail_relay_host is defined | assert
+  assert:
+    that:
+      - "mail_relay_host is defined"
+      - "mail_relay_host | length > 0"
+      - "mail_relay_host != None"
+    fail_msg: "mail_relay_host needs to be set for the role to work"
+    success_msg: "Required variable mail_relay_host is defined"
+
+- name: mail | Check mail_smtp_app_key is defined | assert
+  assert:
+    that:
+      - "mail_smtp_app_key is defined"
+      - "mail_smtp_app_key | length > 0"
+      - "mail_smtp_app_key != None"
+    fail_msg: "mail_smtp_app_key needs to be set for the role to work"
+    success_msg: "Required variable mail_smtp_app_key is defined"
 
 - name: mail | Configure postfix mailname | debconf
   become: yes
   debconf:
     name: postfix
     question: postfix/mailname
-    value: "{{ mail_name }}"
+    value: "{{ mail_hostname }}"
     vtype: string
 
 - name: mail | Configure postfix mailer type | debconf
