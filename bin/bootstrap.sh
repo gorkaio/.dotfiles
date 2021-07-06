@@ -45,8 +45,6 @@ function __bootstrap_usage {
     DOTFILES_USER_NAME_SHORT - System user name (ie: gorka).
     DOTFILES_USER_NAME_FULL  - Full user name (ie: Gorka López de Torre)
     DOTFILES_USER_EMAIL      - User e-mail.
-    DOTFILES_SMTP_APP_KEY    - SMTP auth app key as provided by Gmail.
-    DOTFILES_SMTP_RELAY_HOST - SMTP relay host (ie: [smtp.gmail.com]:587)
 
   Tags:
     $(ls "$ANSIBLE_ROOTDIR/roles" | tr "\n" " ")

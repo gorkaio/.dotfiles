@@ -6,7 +6,7 @@ This repository is **heavily** based on [Alex de Sousa's Dotfiles](https://githu
 # ./bin/bootstrap.sh
 ```
 
-Requires the following environment variables set into the file .envrc at the root of this project.
+Requires the following environment variables set into the file `.envrc` at the root of this project.
 
 ```sh
 # .envrc file
@@ -14,12 +14,10 @@ export DOTFILES_HOST_NAME="<Host name>"
 export DOTFILES_USER_NAME_SHORT="<OS username>"
 export DOTFILES_USER_NAME_FULL="<Full user name>"
 export DOTFILES_USER_EMAIL="<User email address>"
-export DOTFILES_SMTP_APP_KEY="<Gmail SMTP app authorization key>"
-export DOTFILES_SMTP_RELAY_HOST="<SMTP relay host (ie: [smtp.gmail.com]:587)>"
 ```
 
-> **NOTE**: The reason for not having defaults for these variables is to avoid
-> commiting personal data to the repository.
+The reason for not having defaults for these variables is to avoid
+commiting personal data to the repository.
 
 When `./bin/bootstrap.sh` is executed with a tag, will install all roles
 necessary for that tag. This is useful for specific updates e.g:
@@ -28,7 +26,10 @@ necessary for that tag. This is useful for specific updates e.g:
 # ./bin/bootstrap.sh -t erlang
 ```
 
-> For more information just run `./bin/bootstrap.sh -h`
+For more information just run `./bin/bootstrap.sh -h`
+
+> **NOTE**: You might need to add more environment variables to your `.envrc` file
+>  depending on the roles you use. The ones specified here are the bare minimum ones. 
 
 ## Overriding Variables
 
@@ -72,4 +73,3 @@ asdf_version: 0.7.4
 ## To-Do
 
 - Improve how environment vars are handed over to ansible in `bootstrap.sh`
-- SMTP environment variables should be optional and only required for the email role
