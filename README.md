@@ -70,6 +70,10 @@ asdf_version: 0.7.4
 
 [jq](https://stedolan.github.io/jq/) is a command line json processor.
 
+### mail
+
+The [mail role](ansible/roles/mail/README.md) allows you to send and receive mail from the command line.
+
 ## To-Do
 
 - Improve how environment vars are handed over to ansible in `bootstrap.sh`
