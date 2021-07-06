@@ -2,14 +2,14 @@
 ###############################################################################
 # Shell mail
 
-- name: mail | Check mail_hostname is defined | assert
+- name: mail | Check mail_mailname is defined | assert
   assert:
     that:
-      - "mail_hostname is defined"
-      - "mail_hostname | length > 0"
-      - "mail_hostname != None"
-    fail_msg: "mail_hostname needs to be set for the role to work"
-    success_msg: "Required variable mail_hostname is defined"
+      - "mail_mailname is defined"
+      - "mail_mailname | length > 0"
+      - "mail_mailname != None"
+    fail_msg: "mail_mailname needs to be set for the role to work"
+    success_msg: "Required variable mail_mailname is defined"
 
 - name: mail | Check mail_relay_host is defined | assert
   assert:
@@ -34,7 +34,7 @@
   debconf:
     name: postfix
     question: postfix/mailname
-    value: "{{ mail_hostname }}"
+    value: "{{ mail_mailname }}"
     vtype: string
 
 - name: mail | Configure postfix mailer type | debconf
@@ -42,7 +42,7 @@
   debconf:
     name: postfix
     question: postfix/main_mailer_type
-    value: "Satellite system"
+    value: "No configuration"
     vtype: select
 
 - name: mail | Configure postfix relay host | debconf

@@ -1,4 +1,5 @@
 mail_hostname: "{{ lookup('env', 'DOTFILES_HOST_NAME') }}"
+mail_mailname: "{{ mail_hostname }}.localdomain"
 
 mail_email_name:    "{{ lookup('env', 'DOTFILES_USER_NAME_FULL') }}"
 mail_email_address: "{{ lookup('env', 'DOTFILES_USER_EMAIL') }}"

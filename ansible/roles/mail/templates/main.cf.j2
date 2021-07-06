@@ -1,12 +1,31 @@
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+# Uncomment the next line to generate "delayed mail" warnings
+delay_warning_time = 4h
+
+readme_directory = no
+
+# See http://www.postfix.org/COMPATIBILITY_README.html -- default to 2 on
+# fresh installs.
+compatibility_level = 2
+
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
 relayhost = {{ mail_relay_host }}
 smtp_sasl_auth_enable=yes
 smtp_sasl_password_maps=hash:/etc/postfix/sasl/relay_passwd
 smtp_sasl_security_options=noanonymous
 smtp_tls_CAfile=/etc/ssl/certs/ca-certificates.crt
 smtp_use_tls=yes
+smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+myhostname = {{ mail_mailname }}
 myorigin = /etc/mailname
-mydestination = {{ mail_hostname }}.localdomain, {{ mail_hostname }}, localhost.localdomain, localhost
+mydestination = {{ mail_hostname }}, {{ mail_mailname }}, localhost.localdomain, localhost
 mailbox_size_limit = 0
 recipient_delimiter = +
-inet_interfaces = all
+inet_interfaces = loopback-only
 inet_protocols = all
