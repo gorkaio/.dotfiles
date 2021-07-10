@@ -1,0 +1,40 @@
+---
+###############################################################################
+# Java installation
+
+- name: Java | Installs dependencies | apt
+  become: yes
+  loop: "{{ java_dependencies }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+
+- name: Java | Copies java.zsh to zsh directory | copy
+  copy:
+    src: "java.zsh"
+    dest: "{{ dotfiles_config_root }}/zsh/.zsh/java.zsh"
+    force: yes
+
+- name: Java | Installs Java plugin | shell
+  command: "{{ asdf_bin }} plugin-add java"
+  register: java_add
+  failed_when: java_add.rc == 1
+
+- name: Java | Updates Java plugin | shell
+  command: "{{ asdf_bin }} plugin-update java"
+
+- name: Java | Installs Java versions | shell
+  shell: "source {{ asdf_src }} && asdf install java {{ item }}"
+  args:
+    executable: /bin/zsh
+  loop: "{{ java_versions }}"
+
+- name: Java | Sets default Java version | command
+  shell: "source {{ asdf_src }} && asdf global java {{ java_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: Java | Reshims Java | shell
+  shell: "source {{ asdf_src }} && asdf reshim java"
+  args:
+    executable: /bin/zsh

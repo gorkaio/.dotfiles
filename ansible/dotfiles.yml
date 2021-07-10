@@ -36,6 +36,9 @@
     - role: docker
       tags:
         - docker
+    - role: java
+      tags:
+        - java
     - role: mail
       tags:
         - mail

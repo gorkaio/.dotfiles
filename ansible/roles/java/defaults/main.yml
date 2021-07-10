@@ -1,0 +1,7 @@
+java_dependencies:
+  - curl
+  - unzip
+  - jq
+
+java_versions:
+  - openjdk-16.0.1
