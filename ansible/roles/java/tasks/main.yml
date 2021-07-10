@@ -38,3 +38,27 @@
   shell: "source {{ asdf_src }} && asdf reshim java"
   args:
     executable: /bin/zsh
+
+- name: Java | Installs Gradle plugin | shell
+  command: "{{ asdf_bin }} plugin-add gradle"
+  register: gradle_add
+  failed_when: gradle_add.rc == 1
+
+- name: Java | Updates Gradle plugin | shell
+  command: "{{ asdf_bin }} plugin-update gradle"
+
+- name: Java | Installs Gradle versions | shell
+  shell: "source {{ asdf_src }} && asdf install gradle {{ item }}"
+  args:
+    executable: /bin/zsh
+  loop: "{{ gradle_versions }}"
+
+- name: Java | Sets default Gradle version | command
+  shell: "source {{ asdf_src }} && asdf global gradle {{ gradle_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: Java | Reshims Gradle | shell
+  shell: "source {{ asdf_src }} && asdf reshim gradle"
+  args:
+    executable: /bin/zsh
