@@ -36,9 +36,9 @@
     - role: docker
       tags:
         - docker
-    - role: java
+    - role: kotlin
       tags:
-        - java
+        - kotlin
     - role: mail
       tags:
         - mail

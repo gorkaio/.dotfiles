@@ -1,0 +1,27 @@
+---
+###############################################################################
+# Kotlin installation
+
+- name: Kotlin | Installs Kotlin plugin | command
+  command: "{{ asdf_bin }} plugin-add kotlin"
+  register: kotlin_add
+  failed_when: kotlin_add.rc == 1
+
+- name: Kotlin | Updates Kotlin plugin | command
+  command: "{{ asdf_bin }} plugin-update kotlin"
+
+- name: Kotlin | Installs Kotlin versions | shell
+  shell: "source {{ asdf_src }} && asdf install kotlin {{ item }}"
+  args:
+    executable: /bin/zsh
+  loop: "{{ kotlin_versions }}"
+
+- name: Kotlin | Sets default Kotlin version | command
+  shell: "source {{ asdf_src }} && asdf global kotlin {{ kotlin_versions[0] }}"
+  args:
+    executable: /bin/zsh
+
+- name: Kotlin | Reshims Kotlin | shell
+  shell: "source {{ asdf_src }} && asdf reshim kotlin"
+  args:
+    executable: /bin/zsh
