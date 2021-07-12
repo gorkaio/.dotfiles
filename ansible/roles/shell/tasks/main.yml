@@ -2,28 +2,11 @@
 ###############################################################################
 # Shell utilities installation
 
-- name: SHELL | Installs command line fuzzy finder | apt
+- name: SHELL | Installs command line tools | apt
   become: yes
+  loop: "{{ shell_packages }}"
   apt:
-    name: fzf
-    state: present
-
-- name: SHELL | Installs fast and friendly alternative to find | apt
-  become: yes
-  apt:
-    name: fd-find
-    state: present
-
-- name: SHELL | Installs syntax highligthed cat | apt
-  become: yes
-  apt:
-    name: bat
-    state: present
-
-- name: SHELL | Installs command line JSON processor | apt
-  become: yes
-  apt:
-    name: jq
+    name: "{{ item }}"
     state: present
 
 - name: SHELL | Copies shell.zsh to zsh config directory | copy

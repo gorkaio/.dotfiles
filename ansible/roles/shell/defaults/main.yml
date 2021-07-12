@@ -1,0 +1,6 @@
+shell_packages:
+  - inotify-tools
+  - fzf
+  - fd-find
+  - bat
+  - jq
