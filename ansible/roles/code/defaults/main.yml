@@ -12,3 +12,5 @@ code_packages:
 
 code_extensions:
   - eamodio.gitlens
+  - mathiasfrohlich.kotlin
+  - naco-siren.gradle-language
