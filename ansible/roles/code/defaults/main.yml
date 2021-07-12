@@ -9,3 +9,6 @@ code_repository: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/re
 
 code_packages:
   - code
+
+code_extensions:
+  - eamodio.gitlens

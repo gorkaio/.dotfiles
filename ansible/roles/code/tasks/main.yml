@@ -29,3 +29,7 @@
     name: "{{ item }}"
     state: present
     update_cache: yes
+
+- name: Code | Install extensions | shell
+  loop: "{{ code_extensions }}"
+  shell: "code --install-extension {{ item }}"
