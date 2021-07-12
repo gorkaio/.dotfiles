@@ -14,5 +14,6 @@ code_extensions:
   - eamodio.gitlens
   - mathiasfrohlich.kotlin
   - naco-siren.gradle-language
+  - richardwillis.vscode-gradle
   - formulahendry.code-runner
 
