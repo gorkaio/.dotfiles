@@ -37,3 +37,9 @@
     dest: /usr/local/bin/docker-compose
     force: yes
     mode: '0755'
+
+- name: Docker | Add user to docker group | user
+  user:
+    name: "{{ docker_user }}"
+    groups: docker
+    append: yes
