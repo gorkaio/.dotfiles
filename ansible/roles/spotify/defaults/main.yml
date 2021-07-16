@@ -1,0 +1,5 @@
+spotify_gpg_key: "https://download.spotify.com/debian/pubkey_0D811D58.gpg"
+spotify_repository: "deb http://repository.spotify.com stable non-free"
+
+spotify_packages:
+  - spotify-client

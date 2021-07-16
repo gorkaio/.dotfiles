@@ -45,3 +45,6 @@
     - role: vim
       tags:
         - vim
+    - role: spotify
+      tags:
+        - spotify
