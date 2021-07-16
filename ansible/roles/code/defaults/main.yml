@@ -17,3 +17,5 @@ code_extensions:
   - richardwillis.vscode-gradle
   - formulahendry.code-runner
   - jakebecker.elixir-ls
+
+code_settings_path: ".config/Code/User"

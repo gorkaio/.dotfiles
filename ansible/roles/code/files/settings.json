@@ -1,0 +1,7 @@
+{
+    "emmet.includeLanguages": {
+        "mustache": "html",
+        "html-eex": "html"
+    },
+    "terminal.integrated.fontFamily": "Hack"
+}

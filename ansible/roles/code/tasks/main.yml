@@ -33,3 +33,13 @@
 - name: Code | Install extensions | shell
   loop: "{{ code_extensions }}"
   shell: "code --install-extension {{ item }}"
+
+- name: Code | Create vscode config directory | file
+  file:
+    path: "{{ dotfiles_config_root }}/code/{{ code_settings_path }}"
+    state: directory
+
+- name: Code | Copy settings to config | copy
+  copy:
+    src: "{{ dotfiles_ansible_root }}/roles/code/files/settings.json"
+    dest: "{{ dotfiles_config_root }}/code/{{ code_settings_path }}/settings.json"
