@@ -77,3 +77,5 @@ The [mail role](ansible/roles/mail/README.md) allows you to send and receive mai
 ## To-Do
 
 - Improve how environment vars are handed over to ansible in `bootstrap.sh`
+- Make language specific roles install vscode extensions if vscode is available,
+  instead of installing them all in the code role.

@@ -16,4 +16,4 @@ code_extensions:
   - naco-siren.gradle-language
   - richardwillis.vscode-gradle
   - formulahendry.code-runner
-
+  - jakebecker.elixir-ls
