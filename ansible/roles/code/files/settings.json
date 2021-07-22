@@ -3,5 +3,7 @@
         "mustache": "html",
         "html-eex": "html"
     },
-    "terminal.integrated.fontFamily": "Hack"
+    "terminal.integrated.fontFamily": "Hack",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true
 }

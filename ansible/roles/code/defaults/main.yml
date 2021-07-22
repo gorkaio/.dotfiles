@@ -3,6 +3,7 @@ code_dependencies:
   - ca-certificates
   - curl
   - gnupg2
+  - fonts-firacode
 
 code_gpg_key: "https://packages.microsoft.com/keys/microsoft.asc"
 code_repository: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
