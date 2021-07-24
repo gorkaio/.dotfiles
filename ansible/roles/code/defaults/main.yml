@@ -19,5 +19,6 @@ code_extensions:
   - formulahendry.code-runner
   - jakebecker.elixir-ls
   - bradlc.vscode-tailwindcss
+  - bungcip.better-toml
 
 code_settings_path: ".config/Code/User"
