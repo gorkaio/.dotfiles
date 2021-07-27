@@ -20,5 +20,6 @@ code_extensions:
   - jakebecker.elixir-ls
   - bradlc.vscode-tailwindcss
   - bungcip.better-toml
+  - mrorz.language-gettext
 
 code_settings_path: ".config/Code/User"
