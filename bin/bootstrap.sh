@@ -138,6 +138,7 @@ sudo -u "$DOTFILES_USER_NAME_SHORT" \
   DOTFILES_SMTP_APP_KEY="$DOTFILES_SMTP_APP_KEY" \
   DOTFILES_SMTP_RELAY_HOST="$DOTFILES_SMTP_RELAY_HOST" \
   ansible-playbook -i "$DOTFILES_HOSTS" "$DOTFILES_PLAYBOOK" \
+  -e ansible_python_interpreter=/usr/bin/python3 \
   --ask-become-pass \
   --tags "$TAG"
 
