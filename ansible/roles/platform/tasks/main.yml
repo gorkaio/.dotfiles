@@ -1,0 +1,14 @@
+---
+###############################################################################
+# Platform utilities installation
+
+- name: Platform | Installs AWS command line tools | apt
+  become: yes
+  apt:
+    name: awscli
+    state: present
+
+- name: Platform | Installs CDK | shell
+  shell: "source {{ asdf_src }} && npm install aws-cdk typescript -g"
+  args:
+    executable: /bin/zsh
