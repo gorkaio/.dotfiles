@@ -3,6 +3,7 @@ nodejs_dependencies:
   - gpg
 
 nodejs_versions:
+  - 16.8.0
   - 14.2.0
   - 12.16.1
   - 12.14.1
