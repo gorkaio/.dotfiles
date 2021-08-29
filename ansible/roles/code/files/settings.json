@@ -8,4 +8,9 @@
     "editor.fontLigatures": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 250,
+    "files.exclude": {
+        "**/*.js": {"when": "$(basename).ts"},
+        "**/*.d.ts": {"when": "$(basename).ts"},
+        "**/*.js.map": true
+    }
 }
